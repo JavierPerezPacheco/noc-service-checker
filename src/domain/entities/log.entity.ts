@@ -7,7 +7,7 @@ export enum logSeverityLevel {
 export interface LogEntityOptions {
     level: logSeverityLevel;
     message: string;
-    createdAt: Date;
+    createdAt?: Date;
     origin: string;
 }
 
