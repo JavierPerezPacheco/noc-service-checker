@@ -1,7 +1,5 @@
 # 📡 Proyecto NOC
 
-El nombre **NOC** proviene de **Network Operations Center** (Centro de Operaciones de Red), que es una instalación dedicada a monitorear y gestionar el funcionamiento de redes y servicios para asegurar su correcta operación.
-
 Este proyecto es una implementación de monitoreo de servicios utilizando **Arquitectura Limpia** en **TypeScript**. Permite registrar eventos del sistema, comprobar el estado de servicios externos y enviar correos con logs adjuntos en función del nivel de severidad, emulando algunas funciones clave de un NOC para mantener la salud de los servicios bajo control.
 
 
