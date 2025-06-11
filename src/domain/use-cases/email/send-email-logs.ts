@@ -26,6 +26,8 @@ export class SendEmailLogs implements SendLogEmailUseCase {
                 level: logSeverityLevel.low,
                 origin: 'send-email-log',
             });
+            
+            this.logRepository.saveLog( log );
             return true;
         } catch (error) {
 
