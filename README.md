@@ -54,6 +54,17 @@ Este proyecto es una implementación de monitoreo de servicios utilizando **Arqu
    LOG_DATASOURCE=filesystem
    ```
 
+Para que el envío de correos funcione con Gmail, necesitas generar una **clave de aplicación** (App Password) en tu cuenta de Google, ya que Google no permite el uso de la contraseña habitual para aplicaciones externas por motivos de seguridad.
+
+- Activa primero la **verificación en dos pasos** en tu cuenta de Google:  
+   [https://myaccount.google.com/security](https://myaccount.google.com/security)
+
+- Luego, accede a la sección **Contraseñas de aplicaciones** y genera una clave específica para este proyecto:  
+   [https://myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
+
+Copia la clave generada y colócala en la variable `MAILER_SECRET_KEY` de tu archivo `.env`.
+
+
 4. Si quieres usar MongoDB o PostgreSQL, puedes levantar los servicios con Docker:
    ```sh
    docker-compose up -d
