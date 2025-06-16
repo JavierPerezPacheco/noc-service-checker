@@ -27,6 +27,7 @@ export class Server {
         console.log('Server started...');
 
         //** Descomentar para probar */
+
         new SendEmailLogs(
             emailService,
             fsLogRepository
@@ -37,6 +38,7 @@ export class Server {
         );
 
         //** Enviar correo sin adjunto */
+
         emailService.sendEmail({
             to: 'javiperezpacheco@gmail.com',
             subject: 'Logs de sistema',
@@ -47,6 +49,7 @@ export class Server {
         });
 
         //** Enviar correo con adjunto */
+
         emailService.sendEmailWithFileSystemLogs(
             [
                 'javiperezpacheco@gmail.com'
@@ -54,6 +57,7 @@ export class Server {
         );
 
         //** Crear tarea con CronService */
+        
         CronService.createJob(
             '*/5 * * * * *',
             () => {
