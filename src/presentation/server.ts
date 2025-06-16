@@ -2,13 +2,20 @@ import { FileSystemDataSource } from "../infrastructure/datasource/file-system-l
 import { LogRepositoryImpl } from "../infrastructure/repositories/log.repository.impl";
 import { CronService } from "./cron/cron-service";
 import { EmailService } from "./email/email.service";
-import { CheckService } from "../domain/use-cases/checks/check-service";
 import { SendEmailLogs } from "../domain/use-cases/email/send-email-logs";
+import { MongoLogDatasource } from "../infrastructure/datasource/mongo-log.datasource";
+import { PostgresLogDatasource } from "../infrastructure/datasource/postgres-log.datasource";
+import { CheckServiceMultiple } from "../domain/use-cases/checks/check-service-multiple";
 
 
-const logRepository = new LogRepositoryImpl(
+const fsLogRepository = new LogRepositoryImpl(
     new FileSystemDataSource(),
-    // new MongoDatabase(),
+);
+const mongoLogRepository = new LogRepositoryImpl(
+    new MongoLogDatasource(),
+);
+const postgresLogRepository = new LogRepositoryImpl(
+    new PostgresLogDatasource(),
 );
 
 const emailService = new EmailService();
@@ -22,7 +29,7 @@ export class Server {
         //** Descomentar para probar */
         new SendEmailLogs(
             emailService,
-            logRepository
+            fsLogRepository
         ).execute(
             [
                 'javiperezpacheco@gmail.com'
@@ -51,14 +58,12 @@ export class Server {
             '*/5 * * * * *',
             () => {
                 const url = 'https://google.com';
-                new CheckService(
-                    logRepository,
+                new CheckServiceMultiple(
+                    [fsLogRepository, mongoLogRepository, postgresLogRepository],
                     () => console.log(`${url} is ok.`),
                     (error) => console.log(error),
                 ).execute(url);
 
-                new CheckService(logRepository, undefined, undefined)
-                    .execute('http://localhost:3000');
             }
         );
     }
