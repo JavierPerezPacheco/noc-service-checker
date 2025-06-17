@@ -50,8 +50,6 @@ Este proyecto es una implementación de monitoreo de servicios utilizando **Arqu
    POSTGRES_USER=postgres
    POSTGRES_PASS=123456
 
-   # Selección de datasource: filesystem | mongo | postgres
-   LOG_DATASOURCE=filesystem
    ```
 
 Para que el envío de correos funcione con Gmail, necesitas generar una **clave de aplicación** (App Password) en tu cuenta de Google, ya que Google no permite el uso de la contraseña habitual para aplicaciones externas por motivos de seguridad.
